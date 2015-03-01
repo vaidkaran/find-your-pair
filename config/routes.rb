@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'welcome/index'
+  get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
 
   devise_for :users
 
