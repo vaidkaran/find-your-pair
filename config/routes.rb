@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post 'projects/create'
+  get 'projects/new'
+  get 'projects/destroy'
+
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
 

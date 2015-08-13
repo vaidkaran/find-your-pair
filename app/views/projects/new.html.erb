@@ -1,0 +1,24 @@
+<h1>Add a new project</h1>
+
+<p> number of projects is: <%= @user.projects.size %></p>
+
+<%= form_for [@user, @user.projects.build], url: projects_create_path, method: :post do |f| %>
+  <div class="field">
+    <%= f.label :project_name %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :project_application_type %>
+    <%= f.text_field :app_type, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :platform %>
+    <%= f.text_field :platform, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add Project" %>
+  </div>
+<% end %>
