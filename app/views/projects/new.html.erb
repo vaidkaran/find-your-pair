@@ -10,7 +10,7 @@
     </p>
   <% end %>
 
-<%= form_for [@user, @user.projects.build], url: projects_create_path, method: :post do |f| %>
+<%= form_for @project, url: projects_create_path, method: :post do |f| %>
   <div class="field">
     <%= f.label :project_name %>
     <%= f.text_field :name, autofocus: true %>
