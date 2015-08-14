@@ -2,6 +2,14 @@
 
 <p> number of projects is: <%= @user.projects.size %></p>
 
+  <% @user.projects.each do |project| %>
+    <p>
+    Project Name : <%= project.name %>     </br>
+    App Type     : <%= project.app_type %> </br>
+    Platform     : <%= project.platform %> </br>
+    </p>
+  <% end %>
+
 <%= form_for [@user, @user.projects.build], url: projects_create_path, method: :post do |f| %>
   <div class="field">
     <%= f.label :project_name %>
