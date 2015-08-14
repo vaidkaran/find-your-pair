@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
+  get 'welcome/similar_projects', to: 'welcome#similar_projects', as: 'similar-projects'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
