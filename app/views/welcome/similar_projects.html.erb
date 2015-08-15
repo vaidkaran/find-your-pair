@@ -1,1 +1,9 @@
 <h1>In similar projects</h1>
+
+  <% @similar_platform_projects.each do |p| %>
+    <p>
+    Dev's name:   <%= p['fname'] %> </ br>
+    Project name:   <%= p['name'] %> </ br>
+    Project platform:   <%= p['platform'] %> </ br>
+    </p>
+  <% end %>
