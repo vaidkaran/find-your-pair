@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 20150811064109) do
     t.string   "fname"
     t.string   "lname"
     t.string   "profession"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.boolean  "tutor"
+    t.boolean  "student"
+    t.boolean  "team"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

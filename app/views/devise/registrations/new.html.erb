@@ -19,6 +19,21 @@
   </div>
 
   <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -34,6 +49,21 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :tutor, autocomplete: "off" %></ br>
+    <%= f.label 'If you\re a professional, would you like to teach?' %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :student, autocomplete: "off" %></ br>
+    <%= f.label 'If you\'re a student, would you like to be notified of tutors?' %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :team, autocomplete: "off" %></ br>
+    <%= f.label 'Would you like to build a team?' %>
   </div>
 
   <div class="actions">
