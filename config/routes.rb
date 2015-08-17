@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  # Technologies
+  post 'technologies/create'
+  get 'technologies/new'
+  get 'technologies/destroy'
+
+  # Projects
   post 'projects/create'
   get 'projects/new'
   get 'projects/destroy'

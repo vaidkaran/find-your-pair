@@ -1,0 +1,20 @@
+<h1>Add a new project</h1>
+
+
+  <% current_user.technologies.each do |t| %>
+    <p>
+    Technology Name : <%= technology.name %></br>
+    </p>
+  <% end %>
+
+<%= form_for @technology, url: technologies_create_path, method: :post do |f| %>
+  <div class="field">
+    <%= f.label :technology_name %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add Technology" %>
+  </div>
+<% end %>
+

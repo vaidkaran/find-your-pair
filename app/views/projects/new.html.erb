@@ -1,8 +1,8 @@
 <h1>Add a new project</h1>
 
-<p> number of projects is: <%= @user.projects.size %></p>
+<p> number of projects is: <%= current_user.projects.size %></p>
 
-  <% @user.projects.each do |project| %>
+  <% current_user.projects.each do |project| %>
     <p>
     Project Name : <%= project.name %>     </br>
     App Type     : <%= project.app_type %> </br>
