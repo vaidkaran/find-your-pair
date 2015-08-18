@@ -1,0 +1,11 @@
+<h1>In similar projects</h1>
+
+  <% @tech_details.each do |tech_name, users| %>
+    <p>
+    <strong>Technology Name: <%= tech_name %></strong></br>
+        <% users.each do |user_details| %>
+          User's Name: <%= user_details['fname'] %> <%= user_details['lname'] %></br>
+        <% end %>
+    </p>
+  <% end %>
+

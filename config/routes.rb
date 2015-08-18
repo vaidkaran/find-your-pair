@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
-  get 'welcome/similar_projects', to: 'welcome#similar_projects', as: 'similar-projects'
+  get 'welcome/similar_projects', to: 'welcome#similar_projects', as: 'similar_projects'
+  get 'welcome/same_technologies', to: 'welcome#same_technologies', as: 'same_technologies'
 
   # Technologies
   #post 'technologies/create'
