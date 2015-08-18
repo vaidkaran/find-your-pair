@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   devise_for :users
+  resources :technologies
 
   # Technologies
-  post 'technologies/create'
-  get 'technologies/new'
-  get 'technologies/destroy'
+  #post 'technologies/create'
+  #get 'technologies/new'
+  #get 'technologies/destroy'
 
   # Projects
   post 'projects/create'

@@ -17,6 +17,10 @@ class TechnologiesController < ApplicationController
   end
 
   def destroy
+    technology = current_user.technologies.find_by_id(params[:id])
+    technology.destroy
+
+    redirect_to action: :new
   end
 
   def technology_params

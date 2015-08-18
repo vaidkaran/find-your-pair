@@ -6,11 +6,13 @@
   <% end %>
 
   <% current_user.technologies.each do |t| %>
-    <%= t.name %>,
+    <%= t.name %>
+    <%= link_to 'Delete', technology_path(t.id), method: :delete, data: {confirm: "You sure?"} %>
+    </br>
   <% end %>
 </p>
 
-<%= form_for @technology, url: technologies_create_path, method: :post do |f| %>
+<%= form_for @technology, url: technologies_path, method: :post do |f| %>
   <div class="field">
     <%= f.label :technology_name %>
     <%= f.text_field :name, autofocus: true %>
