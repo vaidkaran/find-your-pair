@@ -1,4 +1,6 @@
 class TechnologiesController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @technology = Technology.new
   end
