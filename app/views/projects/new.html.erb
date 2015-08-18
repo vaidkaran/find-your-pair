@@ -7,10 +7,11 @@
     Project Name : <%= project.name %>     </br>
     App Type     : <%= project.app_type %> </br>
     Platform     : <%= project.platform %> </br>
+    <%= link_to 'Delete Project', project_path(project.id), method: :delete, data: {confirm: "You sure?"} %>
     </p>
   <% end %>
 
-<%= form_for @project, url: projects_create_path, method: :post do |f| %>
+<%= form_for @project, url: projects_path, method: :post do |f| %>
   <div class="field">
     <%= f.label :project_name %>
     <%= f.text_field :name, autofocus: true %>

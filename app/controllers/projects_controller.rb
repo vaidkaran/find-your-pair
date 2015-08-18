@@ -17,6 +17,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    project = current_user.projects.find_by_id(params[:id])
+    project.destroy
+
+    redirect_to action: :new
   end
 
   def project_params
