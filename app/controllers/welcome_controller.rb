@@ -9,6 +9,14 @@ class WelcomeController < ApplicationController
   def lihp
   end
 
+  def search
+  end
+
+  def search_result
+    require 'pry'; binding.pry
+    puts "pry before this"
+  end
+
   def similar_projects
     current_user_project_platforms = []
     current_user.projects.select(:platform).distinct.each do |p|

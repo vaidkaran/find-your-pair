@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
   get 'welcome/similar_projects', to: 'welcome#similar_projects', as: 'similar-projects'
+  get 'welcome/search', to: 'welcome#search', as: 'search'
+  get 'welcome/search_result', to: 'welcome#search_result', as: 'search_result'
 
   # Technologies
   #post 'technologies/create'
