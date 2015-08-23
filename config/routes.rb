@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :technologies
   resources :projects
   resources :messages
+  post 'messages/inbox', to: 'messages#inbox', as: 'inbox'
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'

@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   def index
   end
 
-  def new
+  def inbox
     require 'pry'; binding.pry
     puts "just for pry"
   end
