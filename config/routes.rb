@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :technologies
   resources :projects
+  resources :messages
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'

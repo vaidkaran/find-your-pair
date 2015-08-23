@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
 
     record = []
     current_user_project_platforms.each do |p|
-      sql = "select users.fname, projects.name, projects.platform from users join projects on users.id=projects.user_id where projects.platform='#{p}' and users.id!=#{current_user.id};"
+      sql = "select users.fname, projects.name, projects.user_id, projects.platform from users join projects on users.id=projects.user_id where projects.platform='#{p}' and users.id!=#{current_user.id};"
       record << ActiveRecord::Base.connection.execute(sql)
     end
 
