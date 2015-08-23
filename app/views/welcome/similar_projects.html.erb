@@ -5,6 +5,6 @@
     Dev's name:   <%= p['fname'] %> </br>
     Project name:   <%= p['name'] %> </br>
     Project platform:   <%= p['platform'] %> </br>
-    <%= link_to "Send Message", inbox_path(sender_user_id: p['user_id'], receiver_user_id: current_user.id), method: :post %>
+    <%= link_to "Send Message", inbox_path(sender: p['user_id'], receiver: current_user.id), method: :post %>
     </p>
   <% end %>
