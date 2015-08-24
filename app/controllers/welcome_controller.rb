@@ -17,6 +17,27 @@ class WelcomeController < ApplicationController
     puts "pry before this"
   end
 
+  def same_technologies
+    current_user_technologies = []
+    current_user.technologies.select(:name).distinct.each do |t|
+      current_user_technologies << t.name
+    end
+
+    record = {}
+    current_user_technologies.each do |t|
+      sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t}' and t.user_id!=#{current_user.id};"
+      record[t.to_sym] = ActiveRecord::Base.connection.execute(sql)
+    end
+
+    @tech_details = {}
+    record.each do |tech_name, user_details|
+      @tech_details[tech_name.to_sym] = []
+      user_details.each(as: :hash) do |result|
+        @tech_details[tech_name.to_sym] << result
+      end
+    end
+  end
+
   def similar_projects
     current_user_project_platforms = []
     current_user.projects.select(:platform).distinct.each do |p|
@@ -36,4 +57,12 @@ class WelcomeController < ApplicationController
       end
     end
   end
+
+
+  private
+  def search_params
+    params.permit(:technology, :city)
+  end
+
+
 end
