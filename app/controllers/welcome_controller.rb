@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
 
     record = {}
     current_user_technologies.each do |t|
-      sql = "select distinct users.fname, users.lname from users join technologies where technologies.name='#{t}' and users.id!=#{current_user.id};"
+      sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t}' and t.user_id!=#{current_user.id};"
       record[t.to_sym] = ActiveRecord::Base.connection.execute(sql)
     end
 
