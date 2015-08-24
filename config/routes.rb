@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :messages
   post 'messages/inbox', to: 'messages#inbox', as: 'inbox'
+  post 'messages/personal_message', to: 'messages#personal_message', as: 'personal_message'
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'

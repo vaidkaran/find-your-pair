@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
-  def index
+  def inbox
   end
 
-  def inbox
+  def personal_message
     @sender = params[:sender]
     @receiver = params[:receiver]
     @message = Message.new
