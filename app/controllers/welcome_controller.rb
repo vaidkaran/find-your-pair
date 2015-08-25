@@ -9,12 +9,10 @@ class WelcomeController < ApplicationController
   def lihp
   end
 
-  def search
-  end
-
-  def search_result
-    require 'pry'; binding.pry
-    puts "pry before this"
+  def advance_search
+    unless search_params.empty?
+      @user_details = User.joins(:technologies).select("users.fname, users.email, users.lname").where(advance_search_conditions).distinct
+    end
   end
 
   def same_technologies
@@ -64,5 +62,12 @@ class WelcomeController < ApplicationController
     params.permit(:technology, :city)
   end
 
+  def advance_search_conditions
+    search_details = search_params
+    options = {}
+    options[:city] = search_details[:city]
+    options[:technologies] = {name: search_details[:technology]}
+    return options
+  end
 
 end
