@@ -5,5 +5,6 @@
     Dev's name:   <%= p['fname'] %> </br>
     Project name:   <%= p['name'] %> </br>
     Project platform:   <%= p['platform'] %> </br>
+    <%= link_to "Send Message", personal_message_path(receiver: p['user_id']) %>
     </p>
   <% end %>
