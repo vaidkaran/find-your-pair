@@ -2,6 +2,7 @@
 
 
 
+
 <%= form_for(@message, url: messages_path, action: :create, method: :post) do |f|%>
   <%= f.label :content %>
   <%= f.text_field :content %>
