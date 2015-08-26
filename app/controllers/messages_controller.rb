@@ -4,15 +4,14 @@ class MessagesController < ApplicationController
 
   def personal_message
     @sender = current_user.id
-    @receiver = params[:receiver]
+    @receiver = personal_message_params[:receiver]
     @message = Message.new
-    @show_messages = true
+    @message_thread = Message.all.where("sender=#{@sender} OR sender=#{@receiver}").where("receiver=#{@sender} OR receiver=#{@receiver}")
   end
 
   def create
     @message = Message.new(message_params)
     if @message.save
-      #render 'welcome/lihp'
       redirect_to(action: :personal_message, receiver: message_params[:receiver])
     else
       flash.now[:alert] = "An Error occured while sending your message"
@@ -21,7 +20,13 @@ class MessagesController < ApplicationController
   end
 
 
+
+  private
   def message_params
     params.require(:message).permit(:content, :sender, :receiver)
+  end
+
+  def personal_message_params
+    params.permit(:receiver)
   end
 end
