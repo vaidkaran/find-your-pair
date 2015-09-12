@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    require 'pry'; binding.pry
     begin
       @project = current_user.projects.create!(project_params)
       flash.now[:notice] = "Successfully created..."
