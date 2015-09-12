@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
-  def inbox
+  def index
+    @inbox_records = Inbox.all.where("user_one=#{current_user.id}")
   end
 
   def personal_message

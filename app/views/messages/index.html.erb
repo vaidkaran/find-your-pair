@@ -1,0 +1,12 @@
+<h1>Inbox should show the last message of all the sent/received message threads</h1>
+
+<p>
+  <% @inbox_records.each do |record| %>
+    <p>
+      <%= User.find_by_id(record.user_two).fname %>:
+      <%= record.last_message %>
+      <%= link_to "Reply/View", personal_message_path(receiver: record.user_two) %>
+    </p>
+  <% end %>
+</p>
+
