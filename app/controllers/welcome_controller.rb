@@ -21,6 +21,9 @@ class WelcomeController < ApplicationController
       current_user_technologies << t.name
     end
 
+#################################################
+# NEED TO CLEAN THIS UP. USE A SIMPLER LOGIC
+#################################################
     record = {}
     current_user_technologies.each do |t|
       sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t}' and t.user_id!=#{current_user.id};"

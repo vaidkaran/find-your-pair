@@ -2,9 +2,12 @@
 
   <% @tech_details.each do |tech_name, users| %>
     <p>
-    <strong>Technology Name: <%= tech_name %></strong></br>
+    <strong>Technology Name: <%= tech_name %></strong></br> </br>
         <% users.each do |user_details| %>
-          User's Name: <%= user_details['fname'] %> <%= user_details['lname'] %></br>
+          User's Name: <%= user_details['fname'] %>
+          <%= user_details['lname'] %>&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to "Send Message", personal_message_path(receiver: user_details['id']) %>
+          </br> </br>
         <% end %>
     </p>
   <% end %>
