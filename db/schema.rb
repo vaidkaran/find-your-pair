@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912103816) do
+ActiveRecord::Schema.define(version: 20150915064546) do
 
-  create_table "inboxes", force: true do |t|
-    t.integer  "user_one"
-    t.integer  "user_two"
-    t.text     "last_message"
+  create_table "inbox_messages", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "chatmate"
+    t.text     "message"
+    t.boolean  "read"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

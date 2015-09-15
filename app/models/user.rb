@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :projects
   has_many :technologies
+  has_many :inbox_messages
 end

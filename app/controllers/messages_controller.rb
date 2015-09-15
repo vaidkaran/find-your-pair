@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @inbox_records = Inbox.all.where("user_one=#{current_user.id}")
+    @inbox_records = current_user.inbox_messages
   end
 
   def personal_message
@@ -30,6 +30,23 @@ class MessagesController < ApplicationController
 
   def personal_message_params
     params.permit(:receiver)
+  end
+
+  def save_inbox_message
+    if current_user.inbox_messages.empty?
+      begin
+        current_user.inbox_messages.create!({chatmate: message_params[:receiver], message: message_params[:content], read: true})
+        User.find_by_id(message_params[:receiver]).inbox_messages.create!({chatmate: current_user.id, message: message_params[:content], read: true})
+      rescue e
+        raise "Exception in saving data to inbox: #{e}"
+      end
+    else
+      current_user.inbox_messages.where("chatmate=#{message_params[:receiver]}").first.update_attributes({message: 'message updated'})
+      User.find_by_id(message_params[:receiver]).inbox_messages.where("chatmate=#{current_user.id}").first.update_attributes({message: 'message updated'})
+      rescue e
+        raise "Exception in updating data in inbox: #{e}"
+      end
+    end
   end
 
   def save_inbox_data
