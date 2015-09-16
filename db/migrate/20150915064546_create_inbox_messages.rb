@@ -5,6 +5,7 @@ class CreateInboxMessages < ActiveRecord::Migration
       t.integer :chatmate
       t.text :message
       t.boolean :read
+      t.boolean :sent
 
       t.timestamps
     end

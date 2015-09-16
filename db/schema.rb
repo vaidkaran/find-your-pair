@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150915064546) do
     t.integer  "chatmate"
     t.text     "message"
     t.boolean  "read"
+    t.boolean  "sent"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
