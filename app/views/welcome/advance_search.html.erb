@@ -16,6 +16,7 @@
       <p>
         First Name: <%= user_detail[:fname] %></br>
         Email: <%= user_detail[:email] %>
+        <%= link_to "Send Message", personal_message_path(receiver: user_detail[:id]) %>
       </p>
     <% end %>
   <% end %>

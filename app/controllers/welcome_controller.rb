@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
 
   def advance_search
     unless search_params.empty?
-      @user_details = User.joins(:technologies).select("users.fname, users.email, users.lname").where(advance_search_conditions).distinct
+      @user_details = User.joins(:technologies).select("users.id, users.fname, users.email, users.lname").where(advance_search_conditions).distinct
     end
   end
 
