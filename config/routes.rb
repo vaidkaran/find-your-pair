@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :technologies
   resources :projects
   resources :messages
+  resources :circles
   get 'messages/personal_message/:receiver', to: 'messages#personal_message', as: 'personal_message'
 
   get 'welcome/index'
