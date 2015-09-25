@@ -4,6 +4,7 @@
   <% @user_circles.each do |circle| %>
     <p>
       <%= circle.name %>
+      <%= link_to "Show Circle", circle_path(circle.id) %>
     </p>
   <% end %>
 </p>

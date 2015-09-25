@@ -3,6 +3,10 @@ class CirclesController < ApplicationController
     @user_circles = current_user.circles
   end
 
+  def show
+    @circle = Circle.find_by_id params[:id]
+  end
+
   def new
     @circle = Circle.new
   end

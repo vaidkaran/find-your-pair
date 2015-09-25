@@ -9,6 +9,7 @@ class WelcomeController < ApplicationController
   def lihp
   end
 
+# Does not work if the other user doesn't have a technology yet. Need to fix this
   def advance_search
     unless search_params.empty?
       @user_details = User.joins(:technologies).select("users.id, users.fname, users.email, users.lname").where(advance_search_conditions).distinct
