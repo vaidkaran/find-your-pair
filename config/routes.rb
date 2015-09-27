@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :technologies
   resources :projects
+
   resources :messages
-  resources :circles
   get 'messages/personal_message/:receiver', to: 'messages#personal_message', as: 'personal_message'
+
+  resources :circles
+  post 'circles/circle_request', to: 'circles#circle_request', as: 'circle_request'
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
