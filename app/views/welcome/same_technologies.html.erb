@@ -14,17 +14,25 @@
               Send a request to join your circle
               <span class="caret"></span>
             </button>
+
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <% pending_circles=[] %>
               <% current_user.circles.each do |circle| %>
                 <li>
                   <% if FriendCircle.where(user_id: user_details['id']).where(circle_id: circle.id ).present? %>
-                    User is already either added or has a pending request to this circle
+                    <% pending_circles << circle %>
                   <% else %>
-                    <%= link_to circle.name, circle_request_path(circle_id: circle.id), method: :post %>
+                    <%= link_to circle.name, circle_request_path(user_id: user_details['id'], circle_id: circle.id), method: :post %>
                   <% end %>
                 </li>
               <% end %>
+                <% pending_circles.each do |circle| %>
+                  <li>
+                    Pending request for <%= circle.name %>
+                  </li>
+                <% end %>
             </ul>
+
           </div>
           </br> </br>
         <% end %>

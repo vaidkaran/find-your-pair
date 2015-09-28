@@ -8,8 +8,14 @@ class CirclesController < ApplicationController
   end
 
   def circle_request
-    circle_request_params
-
+    fc = FriendCircle.new(circle_request_params)
+    if fc.save
+      flash[:notice] = "Circle request sent"
+      redirect_to same_technologies_url
+    else
+      flash[:alert] = "An Error occured while sending request. Please try again."
+      redirect_to 'welcome/same_technologies'
+    end
   end
 
   def new
@@ -42,7 +48,7 @@ class CirclesController < ApplicationController
     # any user requested is not an admin and the user status is pending by default
     params[:admin] = 0
     params[:user_status] = 0
-    params.permit(:circle_id, :admin, :user_status)
+    params.permit(:user_id, :circle_id, :admin, :user_status)
   end
 
 end
