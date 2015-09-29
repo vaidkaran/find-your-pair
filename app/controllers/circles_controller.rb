@@ -31,12 +31,10 @@ class CirclesController < ApplicationController
         flash[:notice] = "Circle successfully created"
         redirect_to(action: :new)
       else
-        flash[:alert] = "An Error occured while saving your Circle. Please try again."
-        render 'welcome/lihp'
+        render(action: :new)
       end
     else
-      flash[:alert] = "An Error occured while saving your Circle. Please try again."
-      render 'welcome/lihp'
+      render(action: :new)
     end
   end
 

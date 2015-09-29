@@ -2,6 +2,24 @@
 
 
 <%= form_for @circle, url: circles_path, method: :post do |f| %>
+
+
+<% if @circle.errors.any? %>
+<div id='error_explanation'>
+<h2>
+<%= pluralize(@circle.errors.count, "error") %> prohibited this circle from being saved
+</h2>
+<ul>
+<% @circle.errors.full_messages.each do |msg| %>
+<li> <%= msg %> </li>
+<% end %>
+</ul>
+</div>
+<% end %>
+
+
+
+
   <div class="field">
     <%= f.label :circle_name %>
     <%= f.text_field :name, autofocus: true %>

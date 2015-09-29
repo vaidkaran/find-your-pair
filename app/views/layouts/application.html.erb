@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FindYourPair</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>FindYourPair</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+  <body>
+    <div id="user-nav">
+      <% if user_signed_in? %>
+        Logged in as <%= current_user.email.to_s %>
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+      <% elsif(controller_name == 'sessions') %>
+        <%= link_to 'Sign Up', new_user_registration_path %>
+      <% elsif(controller_name == 'registrations') %>
+        <%= link_to 'Log In', new_user_session_path  %>
+      <% else %>
+        <%= link_to 'Sign Up', new_user_registration_path %>
+        <%= link_to 'Log In', new_user_session_path  %>
+      <% end %>
+    </div>
 
-<div id="user-nav">
-  <% if user_signed_in? %>
-    Logged in as <%= current_user.email.to_s %>
-    <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
-  <% elsif(controller_name == 'sessions') %>
-    <%= link_to 'Sign Up', new_user_registration_path %>
-  <% elsif(controller_name == 'registrations') %>
-    <%= link_to 'Log In', new_user_session_path  %>
-  <% else %>
-    <%= link_to 'Sign Up', new_user_registration_path %>
-    <%= link_to 'Log In', new_user_session_path  %>
-  <% end %>
-</div>
+    <p> <%= link_to "Home", root_url %> </p>
 
-<p> <%= link_to "Home", root_url %> </p>
 
-<%= yield %>
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %>">
+        <%= value %>
+      </div>
+    <% end %>
 
-</body>
+    <%= yield %>
+
+  </body>
 </html>
