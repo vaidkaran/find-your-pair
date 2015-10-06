@@ -5,14 +5,17 @@ class TechnologiesController < ApplicationController
     @technology = Technology.new
   end
 
+  def show
+    @technology = Technology.find_by_id params[:id]
+  end
+
   def create
-    begin
-      @technology = current_user.technologies.create!(technology_params)
-      flash.now[:notice] = "Successfully created..."
+    @technology = current_user.technologies.new(technology_params)
+    if @technology.save
+      flash[:notice] = "Successfully created..."
       redirect_to(action: :new)
-    rescue
-      flash.now[:alert] = "An Error occured while saving your technologies"
-      render 'welcome/lihp'
+    else
+      render(action: :new)
     end
   end
 

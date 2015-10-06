@@ -6,14 +6,15 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    begin
-      @project = current_user.projects.create!(project_params)
+    @project = current_user.projects.new(project_params)
+    if @project.save
       flash.now[:notice] = "Successfully created..."
       redirect_to(action: :new)
-    rescue
+    else
       flash.now[:alert] = "An Error occured while saving your project"
       render 'welcome/lihp'
     end
+
   end
 
   def destroy

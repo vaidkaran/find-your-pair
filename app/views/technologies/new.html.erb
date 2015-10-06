@@ -2,17 +2,22 @@
 
 <p>
   <% if (current_user.technologies.size != 0) %>
-    Your Technologies: 
+    Your Technologies:
   <% end %>
 
   <% current_user.technologies.each do |t| %>
-    <%= t.name %>
-    <%= link_to 'Delete', technology_path(t.id), method: :delete, data: {confirm: "You sure?"} %>
-    </br>
+    <% unless t.id.nil? %>
+      <%= t.name %>
+      <%= link_to 'Delete', technology_path(t.id), method: :delete, data: {confirm: "You sure?"} %>
+      </br>
+    <% end %>
   <% end %>
 </p>
 
 <%= form_for @technology, url: technologies_path, method: :post do |f| %>
+
+  <p> <%= render 'shared/error_messages', model: f.object %> </p>
+
   <div class="field">
     <%= f.label :technology_name %>
     <%= f.text_field :name, autofocus: true %>
