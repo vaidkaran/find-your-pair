@@ -1,6 +1,6 @@
 class CirclesController < ApplicationController
   def index
-    @user_circles = current_user.circles
+    @circles = current_user.circles.where("user_status=1")
   end
 
   def show
@@ -9,6 +9,7 @@ class CirclesController < ApplicationController
 
   def circle_request
     fc = FriendCircle.new(circle_request_params)
+    require 'pry'; binding.pry
     if fc.save
       flash[:notice] = "Circle request sent"
       redirect_to same_technologies_url
@@ -38,6 +39,10 @@ class CirclesController < ApplicationController
     end
   end
 
+
+
+private
+
   def circle_params
     params.require(:circle).permit(:name, :description, :motive)
   end
@@ -45,7 +50,6 @@ class CirclesController < ApplicationController
   def circle_request_params
     # any user requested is not an admin and the user status is pending by default
     params[:admin] = 0
-    params[:user_status] = 0
     params.permit(:user_id, :circle_id, :admin, :user_status)
   end
 

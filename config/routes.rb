@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'welcome/advance_search', to: 'welcome#advance_search', as: 'advance_search'
   get 'welcome/similar_projects', to: 'welcome#similar_projects', as: 'similar_projects'
   get 'welcome/same_technologies', to: 'welcome#same_technologies', as: 'same_technologies'
+  get 'welcome/circle_requests', to: 'welcome#circle_requests', as: 'circle_requests'
 
   # Technologies
   #post 'technologies/create'

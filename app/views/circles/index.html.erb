@@ -1,7 +1,7 @@
 <h1>My Circles</h1>
 
 <p>
-  <% @user_circles.each do |circle| %>
+  <% @circles.each do |circle| %>
     <p>
       <%= circle.name %>
       <%= link_to "Show Circle", circle_path(circle.id) %>
