@@ -60,6 +60,10 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def circle_requests
+    @circles = current_user.circles.where("user_status=0")
+  end
+
 
   private
   def search_params

@@ -20,3 +20,6 @@ vendor
 # Ignore all swp/swo files
 *.swp
 *.swo
+
+# Ignore difftool files
+*.orig

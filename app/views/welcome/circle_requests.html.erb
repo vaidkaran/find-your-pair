@@ -1,0 +1,9 @@
+<p>
+  <ul>
+    <% @circles.each do |circle| %>
+      <%= circle.name %>
+      <%= link_to "Accept", process_request_path(circle_id: circle.id, user_status: 1), method: :post %>
+      <%= link_to "Decline", process_request_path(circle_id: circle.id, user_status: 2), method: :post %><br/>
+    <% end %>
+  </ul>
+</p>

@@ -22,7 +22,7 @@
                   <% if FriendCircle.where(user_id: user_details['id']).where(circle_id: circle.id ).present? %>
                     <% pending_circles << circle %>
                   <% else %>
-                    <%= link_to circle.name, circle_request_path(user_id: user_details['id'], circle_id: circle.id), method: :post %>
+                    <%= link_to circle.name, circle_request_path(user_id: user_details['id'], circle_id: circle.id, user_status: 0), method: :post %>
                   <% end %>
                 </li>
               <% end %>

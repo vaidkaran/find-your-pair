@@ -1,6 +1,6 @@
 class CirclesController < ApplicationController
   def index
-    @user_circles = current_user.circles
+    @circles = current_user.circles.where("user_status=1")
   end
 
   def show
@@ -38,6 +38,15 @@ class CirclesController < ApplicationController
     end
   end
 
+  def process_request
+    FriendCircle.where("user_id=#{current_user.id} and circle_id=#{process_request_params[:circle_id]}").first.update(user_status: process_request_params[:user_status])
+    redirect_to(controller: :welcome, action: :circle_requests)
+  end
+
+
+
+private
+
   def circle_params
     params.require(:circle).permit(:name, :description, :motive)
   end
@@ -45,8 +54,11 @@ class CirclesController < ApplicationController
   def circle_request_params
     # any user requested is not an admin and the user status is pending by default
     params[:admin] = 0
-    params[:user_status] = 0
     params.permit(:user_id, :circle_id, :admin, :user_status)
+  end
+
+  def process_request_params
+    params.permit(:circle_id, :user_status)
   end
 
 end
