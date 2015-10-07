@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :circles
   post 'circles/circle_request', to: 'circles#circle_request', as: 'circle_request'
+  post 'circles/process_request', to: 'circles#process_request', as: 'process_request'
 
   get 'welcome/index'
   get 'welcome/lihp', to: 'welcome#lihp', as: 'lihp'
