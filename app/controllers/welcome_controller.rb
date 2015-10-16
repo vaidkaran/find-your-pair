@@ -11,8 +11,10 @@ class WelcomeController < ApplicationController
 
 # Does not work if the other user doesn't have a technology yet. Need to fix this
   def advance_search
-    unless advance_search_conditions.empty?
-      @user_details = User.joins(:technologies).select("users.id, users.fname, users.email, users.lname").where(advance_search_conditions).distinct
+    unless search_params.empty?
+      unless advance_search_conditions.empty?
+        @user_details = User.joins(:technologies).select("users.id, users.fname, users.email, users.lname").where(advance_search_conditions).distinct
+      end
     end
   end
 
