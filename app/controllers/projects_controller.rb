@@ -5,6 +5,10 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def show
+    @project = Project.find_by_id(params[:id])
+  end
+
   def create
     @project = current_user.projects.new(project_params)
     if @project.save
@@ -14,7 +18,6 @@ class ProjectsController < ApplicationController
       flash.now[:alert] = "An Error occured while saving your project"
       render 'welcome/lihp'
     end
-
   end
 
   def destroy
