@@ -11,12 +11,12 @@
       <%= submit_tag 'Search', name: nil %>
     </p>
 
-  <% if @user_details %>
-    <% @user_details.each do |user_detail| %>
+  <% if @users%>
+    <% @users.each do |user| %>
       <p>
-        First Name: <%= user_detail[:fname] %></br>
-        Email: <%= user_detail[:email] %>
-        <%= link_to "Send Message", personal_message_path(receiver: user_detail[:id]) %>
+        First Name: <%= user.fname %></br>
+        Email: <%= user.email %>
+        <%= link_to "Send Message", personal_message_path(receiver: user.id) %>
       </p>
     <% end %>
   <% end %>

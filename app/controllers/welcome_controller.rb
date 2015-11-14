@@ -9,13 +9,32 @@ class WelcomeController < ApplicationController
   def lihp
   end
 
-# Does not work if the other user doesn't have a technology yet. Need to fix this
+# Need to explain the logic here
   def advance_search
     unless search_params.empty?
       unless advance_search_conditions.empty?
-        @user_details = User.joins(:technologies).select("users.id, users.fname, users.email, users.lname").where(advance_search_conditions).distinct
+        search_result_user_ids = []
+        if advance_search_conditions[:technology]
+          tech_user_ids = Technology.where("name like '%#{advance_search_conditions[:technology]}%'").map { |t| t.user_id }
+          search_result_user_ids << tech_user_ids
+        end
+        if advance_search_conditions[:city]
+          city_user_ids = User.where("city like '%#{advance_search_conditions[:city]}%'").map { |u| u.id }
+          search_result_user_ids << city_user_ids
+        end
+
+        @users = User.find(get_intersection_result(search_result_user_ids)) unless(search_result_user_ids.empty?)
       end
     end
+  end
+
+  # Takes an array of array. Returns an array from the intersection of each element of the input array
+  def get_intersection_result(search_result_user_ids)
+    ref = search_result_user_ids[0]
+    search_result_user_ids.each do |array|
+      ref = ref & array
+    end
+    return ref
   end
 
   def same_technologies
@@ -76,7 +95,7 @@ class WelcomeController < ApplicationController
     search_details = search_params
     options = {}
     options[:city] = search_details[:city] unless search_details[:city].strip.empty?
-    options[:technologies] = {name: search_details[:technology]} unless search_details[:technology].strip.empty?
+    options[:technology] = search_details[:technology] unless search_details[:technology].strip.empty?
     return options
   end
 
