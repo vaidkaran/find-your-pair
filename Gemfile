@@ -21,6 +21,12 @@ gem 'bootstrap-sass', '~> 3.3.1'
 # Add browser vendor prefixes automatically
 gem 'autoprefixer-rails'
 
+# Search Engine
+gem 'elasticsearch-model',
+    git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-rails',
+    git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
