@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,4 +13,5 @@ class User < ActiveRecord::Base
 
   has_many :friend_circles, dependent: :destroy
   has_many :circles, through: :friend_circles
+
 end
