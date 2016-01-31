@@ -94,8 +94,12 @@ class WelcomeController < ApplicationController
   def advance_search_conditions
     search_details = search_params
     options = {}
-    options[:city] = search_details[:city] unless search_details[:city].strip.empty?
-    options[:technology] = search_details[:technology] unless search_details[:technology].strip.empty?
+    unless(search_details[:city].nil?)
+      options[:city] = search_details[:city] if(!search_details[:city].strip.empty?)
+    end
+    unless(search_details[:technology].nil?)
+      options[:technology] = search_details[:technology] if(!search_details[:technology].strip.empty?)
+    end
     return options
   end
 
