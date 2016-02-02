@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  include AdvanceSearch
+
   before_action :authenticate_user!, except: [:index]
   def index
     if user_signed_in?
@@ -6,36 +8,15 @@ class WelcomeController < ApplicationController
     end
   end
 
+
   def lihp
   end
 
+
   def advance_search
-    search_result_user_ids = []
-    # search only if user performs a non empty search
-    if advance_search_conditions[:technology]
-      tech_user_ids = Technology.search(advance_search_conditions[:technology]).map { |t| t.user_id.to_i }
-      search_result_user_ids << tech_user_ids
-    end
-    if advance_search_conditions[:city]
-      city_user_ids = User.search(advance_search_conditions[:city]).map { |u| u.id.to_i }
-      search_result_user_ids << city_user_ids
-    end
-
-    # get the intersection of the search field inputs (in case user has filled more than one field)
-    unless search_result_user_ids.empty?
-      @users = User.find(get_intersection_result(search_result_user_ids))
-    end
+    getme_users(advance_search_conditions)
   end
 
-
-  # Takes an array of array. Returns an array from the intersection of each element of the input array
-  def get_intersection_result(search_result_user_ids)
-    ref = search_result_user_ids[0]
-    search_result_user_ids.each do |array|
-      ref = ref & array
-    end
-    return ref
-  end
 
   def same_technologies
     current_user_technologies = []
@@ -61,6 +42,7 @@ class WelcomeController < ApplicationController
     end
   end
 
+
   def similar_projects
     current_user_project_platforms = []
     current_user.projects.select(:platform).distinct.each do |p|
@@ -81,11 +63,15 @@ class WelcomeController < ApplicationController
     end
   end
 
+
   def circle_requests
     @circles = current_user.circles.where("user_status=0")
   end
 
 
+#######################
+# Private methods below
+#######################
   private
   def search_params
     params.permit(:technology, :city)
