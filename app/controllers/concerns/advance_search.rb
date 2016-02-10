@@ -19,6 +19,17 @@ module AdvanceSearch
     end
   end
 
+  def get_filtered_adv_search_params(search_params)
+    options = {}
+    unless(search_params[:city].nil?)
+      options[:city] = search_params[:city] if(!search_params[:city].strip.empty?)
+    end
+    unless(search_params[:technology].nil?)
+      options[:technology] = search_params[:technology] if(!search_params[:technology].strip.empty?)
+    end
+    return options
+  end
+
 
 #######################
 # Private methods below
