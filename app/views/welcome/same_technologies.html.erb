@@ -1,6 +1,7 @@
 <h1>In same technologies</h1>
 
   <% @tech_details.each do |tech_name, users| %>
+    <% next if users.size==0 %>
     <p>
     <strong>Technology Name: <%= tech_name %></strong></br> </br>
         <% users.each do |user_details| %>

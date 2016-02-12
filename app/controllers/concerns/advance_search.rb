@@ -34,10 +34,17 @@ module AdvanceSearch
   #
   # Returns: @tech_details
   ############################################################
-  def get_users_with_these_technologies(user_technologies)
+  def get_users_with_these_technologies(user_technologies, options={})
+
+    if(options[:current_city]==true)
+      with_current_city = "and u.city='#{current_user.city}'"
+    else
+      with_current_city = ""
+    end
+
     record = {}
     user_technologies.each do |t|
-      sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t.name}' and t.user_id!=#{current_user.id};"
+      sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t.name}' and t.user_id!=#{current_user.id} #{with_current_city};"
       record[t.name.to_sym] = ActiveRecord::Base.connection.execute(sql)
     end
 
@@ -48,8 +55,6 @@ module AdvanceSearch
         @tech_details[tech_name.to_sym] << result
       end
     end
-    require 'pry'; binding.pry
-    puts 'this'
   end
 
   def get_filtered_adv_search_params(search_params)

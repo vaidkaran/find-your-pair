@@ -1,2 +1,16 @@
 <h1> This is LIHP </h1>
 
+<h2>People working on the same technologies in your city</h2>
+
+<ul class="list-unstyled">
+  <% @tech_details.each do |tech, user_details| %>
+    <% next if user_details.size==0 %>
+    <li><%= tech %></li>
+      <ul>
+        <% user_details.each do |u| %>
+          <li><%= u['fname'] %></li>
+        <% end %>
+      </ul>
+  <% end %>
+</ul>
+

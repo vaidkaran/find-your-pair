@@ -10,6 +10,9 @@ class WelcomeController < ApplicationController
 
 
   def lihp
+  # Sets @tech_details A Hash with the key as the technology name and the value as array of Hash of user details
+    options = {current_city: true}
+    get_users_with_these_technologies(current_user.technologies.select(:name).distinct, options)
   end
 
 
@@ -21,7 +24,8 @@ class WelcomeController < ApplicationController
 
   def same_technologies
   # Returns a Hash with the key as the technology name and the value as array of Hash of user details
-    get_users_with_these_technologies(current_user.technologies.select(:name).distinct)
+    options = {current_city: false}
+    get_users_with_these_technologies(current_user.technologies.select(:name).distinct, options)
   end
 
 
