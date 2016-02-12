@@ -14,32 +14,14 @@ class WelcomeController < ApplicationController
 
 
   def advance_search
-    getme_users(advance_search_conditions)
+    # Sets @users as an array of resulting user objects to be used in views
+    get_adv_search_resulting_users(advance_search_conditions)
   end
 
 
   def same_technologies
-    current_user_technologies = []
-    current_user.technologies.select(:name).distinct.each do |t|
-      current_user_technologies << t.name
-    end
-
-#################################################
-# NEED TO CLEAN THIS UP. USE A SIMPLER LOGIC
-#################################################
-    record = {}
-    current_user_technologies.each do |t|
-      sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t}' and t.user_id!=#{current_user.id};"
-      record[t.to_sym] = ActiveRecord::Base.connection.execute(sql)
-    end
-
-    @tech_details = {}
-    record.each do |tech_name, user_details|
-      @tech_details[tech_name.to_sym] = []
-      user_details.each(as: :hash) do |result|
-        @tech_details[tech_name.to_sym] << result
-      end
-    end
+  # Returns a Hash with the key as the technology name and the value as array of Hash of user details
+    get_users_with_these_technologies(current_user.technologies.select(:name).distinct)
   end
 
 

@@ -1,7 +1,14 @@
 module AdvanceSearch
   extend ActiveSupport::Concern
 
-  def getme_users(adv_search_conditions)
+  ############################################################
+  # Params: Hash of advance search conditions
+  #
+  # Sets: @users = An array of the resulting user objects
+  #
+  # Returns: @users
+  ############################################################
+  def get_adv_search_resulting_users(adv_search_conditions)
     search_result_user_ids = []
     # search only if user performs a non empty search
     if advance_search_conditions[:technology]
@@ -13,10 +20,36 @@ module AdvanceSearch
       search_result_user_ids << city_user_ids
     end
 
-    # get the intersection of the search field inputs (in case user has filled more than one field)
+    #returns an array of the resulting User objects
     unless search_result_user_ids.empty?
+    # get the intersection of the search field inputs (in case user has filled more than one field)
       @users = User.find(get_intersection_result(search_result_user_ids))
     end
+  end
+
+  ############################################################
+  # Params: Array of Technology objects
+  #
+  # Sets: @tech_details = A Hash with the key as the technology name and the value as array of Hash of user details
+  #
+  # Returns: @tech_details
+  ############################################################
+  def get_users_with_these_technologies(user_technologies)
+    record = {}
+    user_technologies.each do |t|
+      sql = "SELECT u.fname, u.id FROM users u INNER JOIN technologies t ON u.id = t.user_id WHERE t.name='#{t.name}' and t.user_id!=#{current_user.id};"
+      record[t.name.to_sym] = ActiveRecord::Base.connection.execute(sql)
+    end
+
+    @tech_details = {}
+    record.each do |tech_name, user_details|
+      @tech_details[tech_name.to_sym] = []
+      user_details.each(as: :hash) do |result|
+        @tech_details[tech_name.to_sym] << result
+      end
+    end
+    require 'pry'; binding.pry
+    puts 'this'
   end
 
   def get_filtered_adv_search_params(search_params)
@@ -32,7 +65,7 @@ module AdvanceSearch
 
 
 #######################
-# Private methods below
+# PRIVATE METHODS BELOW
 #######################
   private
 
