@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  include AdvanceSearch
+  include FetchUsers
 
   before_action :authenticate_user!, except: [:index]
   def index
@@ -13,6 +13,9 @@ class WelcomeController < ApplicationController
   # Sets @tech_details A Hash with the key as the technology name and the value as array of Hash of user details
     options = {current_city: true}
     get_users_with_these_technologies(current_user.technologies.select(:name).distinct, options)
+
+  # Sets @s_t_users: A Hash with key :student or :tutor and the value as the array of User objects
+    get_s_t_users
   end
 
 

@@ -14,3 +14,23 @@
   <% end %>
 </ul>
 
+
+<ul class="list-unstyled">
+  <% @s_t_users.each do |type, users| %>
+
+    <% if type == :tutor %>
+      <% heading = "Tutors near you:" %>
+    <% elsif type == :student %>
+      <% heading = "Students near you:" %>
+    <% else %>
+      <% heading = type %>
+    <% end %>
+
+    <li><%= heading %></li>
+      <ul>
+        <% users.each do |u| %>
+          <li><%= u.email %></li>
+        <% end %>
+      </ul>
+  <% end %>
+</ul>

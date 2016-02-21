@@ -1,4 +1,4 @@
-module AdvanceSearch
+module FetchUsers
   extend ActiveSupport::Concern
 
   ############################################################
@@ -26,6 +26,19 @@ module AdvanceSearch
       @users = User.find(get_intersection_result(search_result_user_ids))
     end
   end
+
+
+  def get_filtered_adv_search_params(search_params)
+    options = {}
+    unless(search_params[:city].nil?)
+      options[:city] = search_params[:city] if(!search_params[:city].strip.empty?)
+    end
+    unless(search_params[:technology].nil?)
+      options[:technology] = search_params[:technology] if(!search_params[:technology].strip.empty?)
+    end
+    return options
+  end
+
 
   ############################################################
   # Params: Array of Technology objects
@@ -57,17 +70,15 @@ module AdvanceSearch
     end
   end
 
-  def get_filtered_adv_search_params(search_params)
-    options = {}
-    unless(search_params[:city].nil?)
-      options[:city] = search_params[:city] if(!search_params[:city].strip.empty?)
-    end
-    unless(search_params[:technology].nil?)
-      options[:technology] = search_params[:technology] if(!search_params[:technology].strip.empty?)
-    end
-    return options
-  end
 
+  def get_s_t_users
+    @s_t_users = {}
+    if current_user.tutor == true
+      @s_t_users[:student] = User.all.where(student: true).where(city: current_user.city)
+    elsif current_user.student == true
+      @s_t_users[:tutor] = User.all.where(tutor: true).where(city: current_user.city)
+    end
+  end
 
 #######################
 # PRIVATE METHODS BELOW
