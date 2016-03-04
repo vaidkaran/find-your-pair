@@ -6,18 +6,16 @@ describe WelcomeController, type: :controller do
     expect(response.status).to eq(200)
   end
 
-  it 'should render the index view for a logged out user'
-    #current_user = nil
-    #get :index
-    #expect(response).to render_template('welcome/index')
+  it 'should render the index view for a logged out user' do
+    get :index
+    expect(response).to render_template('welcome/index')
+  end
 
   it 'should render the lihp view for a logged in user' do
-    #@request.env["devise.mapping"] = Devise.mappings[:user]
-    #user = FactoryGirl.build_stubbed(:user)
     user = FactoryGirl.create(:user)
     sign_in user
     get :index
-
     expect(response).to redirect_to(lihp_url)
   end
+
 end
