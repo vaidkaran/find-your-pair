@@ -28,11 +28,17 @@ describe WelcomeController, type: :controller do
       sign_in user
     end
 
-    it 'should have a valid user in current_user' do
-      expect(controller.current_user.email).to eq 'vaidkaran89@gmail.com'
-    end
+    it 'should not be able to enter duplicate technologies'
 
-    it 'sets @s_t_users with correct values'
+    it 'sets @s_t_users with correct values' do
+      users = 10.times {FactoryGirl.create(:user_with_technologies)}
+      user = FactoryGirl.create(:user_with_technologies)
+      sign_in user
+      get :lihp
+      p @s_t_users
+      require 'pry'; binding.pry
+      puts 'hi'
+    end
 
   end
 end
