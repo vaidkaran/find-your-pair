@@ -31,11 +31,30 @@ describe WelcomeController, type: :controller do
     it 'should not be able to enter duplicate technologies'
 
     it 'sets @s_t_users with correct values' do
-      users = 10.times {FactoryGirl.create(:user_with_technologies)}
+      pending 'First work on the scenario "should not be able to enter duplicate technologies"'
       user = FactoryGirl.create(:user_with_technologies)
       sign_in user
+
+      current_user_technologies = user.technologies
+      tech_details = {}
+      #current_user_technologies.each do |t|
+      #  tech_details[t.to_sym] = {}
+      #end
+
+      users = []
+      10.times {users.push(FactoryGirl.create(:user_with_technologies))}
+
+      current_user_technologies.each do |current_user_t|
+        users.each do |u|
+          u.technologies.each do |other_user_t|
+            if current_user_t.name == other_user_t.name
+              tech_details[current_user_t.name.to_sym] = {fname: u.fname, id: u.id}
+            end
+          end
+        end
+      end
+
       get :lihp
-      p @s_t_users
       require 'pry'; binding.pry
       puts 'hi'
     end
