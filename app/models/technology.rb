@@ -5,4 +5,5 @@ class Technology < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   validates :name, presence: true
+  validates_uniqueness_of :name, scope: :user_id
 end
