@@ -1,12 +1,11 @@
 <% if model.errors.any? %>
-<div id='error_explanation'>
-<h2>
-<%= pluralize(model.errors.count, "error") %> prohibited this circle from being saved
-</h2>
-<ul>
-<% model.errors.full_messages.each do |msg| %>
-<li> <%= msg %> </li>
-<% end %>
-</ul>
+<div id='error_explanation' class='alert alert-danger'>
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong> You need to take care of the following: </strong>
+  <ul>
+  <% model.errors.full_messages.each do |msg| %>
+  <li> <%= msg %> </li>
+  <% end %>
+  </ul>
 </div>
 <% end %>

@@ -14,8 +14,8 @@
   <% end %>
 </p>
 
-<%= form_for @technology, url: technologies_path, method: :post do |f| %>
 
+<%= form_for @technology, url: technologies_path, method: :post do |f| %>
   <p> <%= render 'shared/error_messages', model: f.object %> </p>
 
   <div class="field">
