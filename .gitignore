@@ -23,3 +23,6 @@ vendor
 
 # Ignore difftool files
 *.orig
+
+#ignore ctags file
+tags

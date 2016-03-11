@@ -16,6 +16,14 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
 
+# Unit tests
+gem 'rspec-rails'
+
+# Test data
+group :development, :test do
+  gem 'factory_girl_rails'
+end
+
 # Bootstrap!
 gem 'bootstrap-sass', '~> 3.3.1'
 # Add browser vendor prefixes automatically
