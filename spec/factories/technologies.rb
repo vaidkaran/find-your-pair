@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :technology do
-    name {['ruby', 'nodejs', 'java', 'selenium', 'rails'].sample}
+    sequence(:name) { |n| "techname#{n}" }
   end
 end

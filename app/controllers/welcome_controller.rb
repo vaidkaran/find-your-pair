@@ -14,6 +14,12 @@ class WelcomeController < ApplicationController
     options = {current_city: true}
     get_users_with_these_technologies(current_user.technologies.select(:name).distinct, options)
 
+    ########################
+    # TODO : BUGFIX
+    ########################
+    # A user is allowed to register as a student and a tutor both.
+    # So allow him to see both of the suggestions
+    ########################
   # Sets @s_t_users: A Hash with key :student or :tutor and the value as the array of User objects
     get_s_t_users
   end

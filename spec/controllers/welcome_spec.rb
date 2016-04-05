@@ -28,11 +28,16 @@ describe WelcomeController, type: :controller do
       sign_in user
     end
 
-    it 'should not be able to enter duplicate technologies'
+    it 'should not be able to enter duplicate technologies' do
+      user = FactoryGirl.create(:user)
+      user.technologies.new(name: 'ruby')
+      expect(user.save).to be true
+      user.technologies.new(name: 'ruby')
+      expect(user.save).to be false
+    end
 
     it 'sets @s_t_users with correct values' do
-      pending 'First work on the scenario "should not be able to enter duplicate technologies"'
-      user = FactoryGirl.create(:user_with_technologies)
+      user = FactoryGirl.create(:user)
       sign_in user
 
       current_user_technologies = user.technologies
@@ -41,11 +46,19 @@ describe WelcomeController, type: :controller do
       #  tech_details[t.to_sym] = {}
       #end
 
-      users = []
-      10.times {users.push(FactoryGirl.create(:user_with_technologies))}
+      # create some more users
+      other_user1 = FactoryGirl.create(:user, student: true, tutor: false)
+      other_user2 = FactoryGirl.create(:user, student: false, tutor: true)
+      other_user3 = FactoryGirl.create(:user, student: true, tutor: true)
+      other_user4 = FactoryGirl.create(:user, student: false, tutor: false)
+
+      # set a common technology for current_user and other users
+      other_users.each do |u|
+        u.technologies.new(name: 'ruby')
+      end
 
       current_user_technologies.each do |current_user_t|
-        users.each do |u|
+        other_users.each do |u|
           u.technologies.each do |other_user_t|
             if current_user_t.name == other_user_t.name
               tech_details[current_user_t.name.to_sym] = {fname: u.fname, id: u.id}
